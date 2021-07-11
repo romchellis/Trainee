@@ -1,7 +1,5 @@
 package ex.training.loadbalancer;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public abstract class LoadBalancer {
@@ -9,8 +7,7 @@ public abstract class LoadBalancer {
     protected final List<String> servers;
 
     protected LoadBalancer(List<String> servers) {
-        List<String> copy = List.copyOf(servers);
-        this.servers = copy;
+        this.servers = List.copyOf(servers);
     }
 
     public List<String> getServers() {

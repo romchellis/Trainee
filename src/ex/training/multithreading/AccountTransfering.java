@@ -3,6 +3,8 @@ package ex.training.multithreading;
 import java.math.BigInteger;
 import java.util.Random;
 import java.util.concurrent.Executors;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -11,24 +13,24 @@ public class AccountTransfering {
     //need to transfer from acc a to b ,
     public static void main(String[] args) {
         var transfering = new AccountTransfering();
-        var accounts = IntStream.range(0, 3)
+        var accounts = IntStream.range(0, 2)
                 .mapToObj(it -> {
                     BigInteger bigInteger = new BigInteger(String.valueOf(new Random().nextInt(1000)));
                     return new Account(it, bigInteger);
                 })
                 .collect(Collectors.toList());
-        var executor = Executors.newFixedThreadPool(15);
-        for (int i = 0; i < 1000; i++) {
+        var executor = Executors.newFixedThreadPool(150);
+        for (int i = 0; i < 100000; i++) {
             int finalI = i;
             executor.submit(() -> {
                 var sum = new BigInteger(String.valueOf(new Random().nextInt(300)));
                 if (finalI % 2 == 0) {
                     sum = sum.negate();
                 }
-                var firstIndex = new Random().nextInt(3);
+                var firstIndex = new Random().nextInt(2);
                 var secondIndex = 0;
                 while (secondIndex == firstIndex) {
-                    secondIndex = new Random().nextInt(3);
+                    secondIndex = new Random().nextInt(2);
                 }
                 transfering.transfer(
                         accounts.get(firstIndex),
@@ -48,10 +50,10 @@ public class AccountTransfering {
             BigInteger amountOne = from.getAmount();
             BigInteger amountTwo = to.getAmount();
 
-            if (amountOne.compareTo(amountTwo) < 0) {
-                System.out.println("Error: " + amountOne + " is less than " + amountTwo);
-                return;
-            }
+//            if (amountOne.compareTo(amountTwo) < 0) {
+//                System.out.println("Error: " + amountOne + " is less than " + amountTwo);
+//                return;
+//            }
 
             System.out.println("transfer from: " + firstId + " with " + amountOne
                     + " to " + secondId + " with " + amountTwo
@@ -64,26 +66,36 @@ public class AccountTransfering {
                     + " and " + secondId + " has " + to.getAmount());
         };
         if (firstId < secondId) {
-            synchronized (from) {
-                System.out.println("get lock " + from.getId());
-                synchronized (to) {
-                    System.out.println("get lock " + to.getId());
-                    r.run();
-                }
-            }
+            from.lock.lock();
+//            synchronized (from) {
+            to.lock.lock();
+            System.out.println("get lock " + from.getId());
+//                synchronized (to) {
+            System.out.println("get lock " + to.getId());
+            r.run();
+            from.lock.unlock();
+            to.lock.unlock();
+//                }
+
+//            }
         } else {
-            synchronized (to) {
-                System.out.println("get lock " + to.getId());
-                synchronized (from) {
-                    System.out.println("get lock " + from.getId());
-                    r.run();
-                }
-            }
+//            synchronized (to) {
+            from.lock.lock();
+            System.out.println("get lock " + from.getId());
+//                synchronized (from) {
+            to.lock.lock();
+            System.out.println("get lock " + to.getId());
+            r.run();
+            to.lock.unlock();
+            from.lock.unlock();
+//                }
+//            }
         }
     }
 }
 
 class Account {
+    public final Lock lock = new ReentrantLock();
     private BigInteger amount;
     private int id = 0;
 
