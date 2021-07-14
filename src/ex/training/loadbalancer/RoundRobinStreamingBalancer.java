@@ -6,10 +6,11 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class RoundRobinStreamingBalancer extends LoadBalancer {
+
     private final Iterator<String> iterator;
 
-    public RoundRobinStreamingBalancer(final List<String> servers) {
-        super(servers);
+    public RoundRobinStreamingBalancer(final List<String> nodes) {
+        super(nodes);
         var serverStream = Stream.generate(servers::stream).flatMap(Function.identity());
         iterator = serverStream.iterator();
     }

@@ -72,8 +72,8 @@ ex/training/multithreading/Method2CyclicBarrier.java
 ex/training/stack/MyStack.java
  ex.training.stack.MyQueue
  ex.training.stack.MyStack
-ex/training/multithreading/BoundedBlockingQueue.java
- ex.training.multithreading.BoundedBlockingQueue
+ex/training/loadbalancer/RoundRobbinLoadBalancer.java
+ ex.training.loadbalancer.RoundRobbinLoadBalancer
 ex/training/multithreading/FooBar.java
  ex.training.multithreading.FooBar
 ex/training/queue/MyQueueTestTest.java
@@ -105,8 +105,8 @@ ex/training/arrays/BigIntegerArray.java
  ex.training.arrays.BigIntegerArray
 ex/training/mask/Masking.java
  ex.training.mask.Masking
-ex/training/multithreading/FizzBuzz.java
- ex.training.multithreading.FizzBuzz
+ex/training/loadbalancer/LoadBalancer.java
+ ex.training.loadbalancer.LoadBalancer
 ex/training/hash/UniqueQueue.java
  ex.training.hash.UniqueQueue
 ex/training/arrays/HasDoubles.java
@@ -146,10 +146,11 @@ ex/training/loadbalancer/RandomLoadBalancer.java
  ex.training.loadbalancer.RandomLoadBalancer
 ex/training/loadbalancer/RoundRobbinLoadBalancerTest.java
  ex.training.loadbalancer.RoundRobbinLoadBalancerTest
-ex/training/loadbalancer/LoadBalancer.java
- ex.training.loadbalancer.LoadBalancer
-ex/training/loadbalancer/RoundRobbinLoadBalancer.java
- ex.training.loadbalancer.RoundRobbinLoadBalancer
+ex/training/multithreading/BoundedBlockingQueue.java
+ ex.training.multithreading.BoundedBlockingQueue
+ex/training/multithreading/FizzBuzz.java
+ ex.training.multithreading.FizzBuzz
 ex/training/loadbalancer/RoundRobinStreamingBalancer.java
  ex.training.loadbalancer.RoundRobinStreamingBalancer
- ex.training.loadbalancer.Test
+test/java/loadbalancer/RoundRobinStreamingBalancerTest.java
+ loadbalancer.RoundRobinStreamingBalancerTest
