@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="loadbalancer.RoundRobinStreamingBalancerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-07-14T12:22:04" hostname="N106201" time="4.466">
-  <properties/>
-  <testcase name="getIpTest()" classname="loadbalancer.RoundRobinStreamingBalancerTest" time="4.466"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
